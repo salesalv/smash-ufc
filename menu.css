@@ -1,0 +1,287 @@
+/* Ocultar botones de navegación - ahora usamos menú hamburguesa */
+.nav-links .nav-btn {
+    display: none;
+}
+
+/* Botón Hamburguesa */
+.hamburger-btn {
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(210, 10, 10, 0.3);
+    margin-right: 20px;
+    flex-shrink: 0;
+    order: -1;
+}
+
+.hamburger-btn:hover {
+    background: linear-gradient(135deg, #ff0000 0%, #b00 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(210, 10, 10, 0.5);
+}
+
+/* Menú Lateral */
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 350px;
+    height: 100vh;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+.sidebar-menu.active {
+    left: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 25px;
+    border-bottom: 2px solid #333;
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+}
+
+.sidebar-header h2 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 36px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.sidebar-nav {
+    padding: 20px 0;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 18px 25px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-link:hover {
+    background-color: rgba(210, 10, 10, 0.2);
+    border-left-color: #d20a0a;
+    padding-left: 30px;
+}
+
+/* Overlay para el menú */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.sidebar-menu.active ~ .sidebar-overlay,
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+/* Botón de Perfil */
+.profile-btn {
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(210, 10, 10, 0.3);
+    margin-left: 15px;
+}
+
+.profile-btn:hover {
+    background: linear-gradient(135deg, #ff0000 0%, #b00 100%);
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(210, 10, 10, 0.5);
+}
+
+/* Dropdown de Perfil */
+.profile-dropdown {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    width: 320px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    border: 2px solid #333;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.profile-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-header {
+    padding: 25px;
+    border-bottom: 2px solid #333;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 900;
+    flex-shrink: 0;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h3 {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.profile-info p {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+.profile-info small {
+    font-size: 12px;
+    color: #888;
+}
+
+.profile-actions {
+    padding: 15px 0;
+}
+
+.profile-action {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+}
+
+.profile-action:hover {
+    background-color: rgba(210, 10, 10, 0.2);
+    padding-left: 30px;
+}
+
+.logout-btn {
+    color: #ff4444 !important;
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 68, 68, 0.2) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar-menu {
+        width: 300px;
+        left: -300px;
+    }
+    
+    .profile-dropdown {
+        width: 280px;
+        right: 10px;
+    }
+    
+    .hamburger-btn,
+    .profile-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar-menu {
+        width: 100%;
+        left: -100%;
+    }
+    
+    .profile-dropdown {
+        width: calc(100% - 20px);
+        right: 10px;
+        left: 10px;
+    }
+}
+

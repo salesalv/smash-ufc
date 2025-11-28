@@ -1,0 +1,36 @@
+# Archivos de configuración con credenciales
+config.php
+
+# Archivos de prueba temporales
+test-*.php
+
+# Logs de PHP
+*.log
+php_error_log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos temporales
+*.tmp
+*.bak
+*.cache
+
+# Node modules (si se usa npm)
+node_modules/
+
+# Archivos de sesión PHP
+sess_*
+
+# Archivos de uploads (si los hay)
+uploads/
+

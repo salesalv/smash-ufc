@@ -1,0 +1,446 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Fondo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+    z-index: -1;
+}
+
+/* Navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 100%);
+    position: relative;
+    z-index: 100;
+}
+
+.logo-container {
+    flex: 0 0 auto;
+}
+
+.ufc-logo-small {
+    font-size: 48px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -2px;
+    font-style: italic;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.nav-btn {
+    padding: 12px 24px;
+    background-color: #d4d4d4;
+    color: #000;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+}
+
+.nav-btn:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 212, 212, 0.4);
+}
+
+.nav-btn.active {
+    background-color: #d20a0a;
+    color: #fff;
+}
+
+.nav-btn.active:hover {
+    background-color: #ff0000;
+}
+
+.nav-btn-login {
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+    color: #fff !important;
+    border: 2px solid #d20a0a;
+}
+
+.nav-btn-login:hover {
+    background: linear-gradient(135deg, #ff0000 0%, #b00 100%);
+    border-color: #ff0000;
+}
+
+.nav-btn-register {
+    background: linear-gradient(135deg, #900 0%, #600 100%);
+    color: #fff !important;
+    border: 2px solid #900;
+}
+
+.nav-btn-register:hover {
+    background: linear-gradient(135deg, #b00 0%, #800 100%);
+    border-color: #b00;
+}
+
+/* Banner Principal */
+.main-banner {
+    background-color: #f5f5f5;
+    padding: 30px 40px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.main-banner h1 {
+    font-size: 42px;
+    font-weight: 900;
+    color: #000;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.banner-subtitle {
+    font-size: 16px;
+    color: #333;
+    margin-top: 15px;
+    line-height: 1.5;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contenido Principal */
+.main-content {
+    padding: 40px;
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Secciones de Información */
+.info-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Tarjetas de Información */
+.info-card {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 30px 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.info-card h2 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #000;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.info-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-list li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+    padding-left: 25px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.info-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #d20a0a;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.info-card.objective {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+}
+
+.objective-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+/* Botón Blog */
+.blog-button-container {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.btn-blog {
+    padding: 18px 60px;
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 6px 20px rgba(210, 10, 10, 0.4);
+}
+
+.btn-blog:hover {
+    background: linear-gradient(135deg, #ff0000 0%, #b00 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(210, 10, 10, 0.6);
+}
+
+/* Secciones de Blog */
+.blog-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.blog-card {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 30px 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.blog-card h2 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #000;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.blog-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.blog-list li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+    padding-left: 25px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.blog-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #d20a0a;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.blog-card.highlight {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+}
+
+.blog-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.7;
+}
+
+/* Botón Volver */
+.back-button-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-back {
+    padding: 14px 35px;
+    background: linear-gradient(135deg, #444 0%, #222 100%);
+    color: #fff;
+    border: 2px solid #666;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-back:hover {
+    background: linear-gradient(135deg, #555 0%, #333 100%);
+    border-color: #888;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Imagen de fondo */
+.background-fighter-image {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: none;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .main-banner h1 {
+        font-size: 36px;
+    }
+
+    .info-card h2,
+    .blog-card h2 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .nav-links {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-btn {
+        padding: 10px 18px;
+        font-size: 12px;
+    }
+
+    .ufc-logo-small {
+        font-size: 40px;
+    }
+
+    .main-banner {
+        padding: 20px 20px;
+    }
+
+    .main-banner h1 {
+        font-size: 28px;
+    }
+
+    .main-content {
+        padding: 25px 20px;
+    }
+
+    .info-card,
+    .blog-card {
+        padding: 25px 30px;
+    }
+
+    .info-list li,
+    .blog-list li,
+    .objective-text,
+    .blog-text {
+        font-size: 15px;
+    }
+
+    .btn-blog {
+        font-size: 20px;
+        padding: 16px 50px;
+    }
+
+    .btn-back {
+        font-size: 14px;
+        padding: 12px 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ufc-logo-small {
+        font-size: 36px;
+    }
+
+    .nav-btn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .main-banner h1 {
+        font-size: 22px;
+    }
+
+    .main-content {
+        padding: 20px 15px;
+    }
+
+    .info-card,
+    .blog-card {
+        padding: 20px 25px;
+    }
+
+    .info-card h2,
+    .blog-card h2 {
+        font-size: 18px;
+    }
+
+    .info-list li,
+    .blog-list li,
+    .objective-text,
+    .blog-text {
+        font-size: 14px;
+    }
+
+    .btn-blog {
+        font-size: 18px;
+        padding: 14px 40px;
+    }
+
+    .btn-back {
+        font-size: 13px;
+        padding: 10px 25px;
+    }
+
+    .banner-subtitle {
+        font-size: 14px;
+    }
+}
+

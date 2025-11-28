@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC - Peleadores por Peso</title>
+    <link rel="stylesheet" href="peleadores.css">
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="ufc-logo-small" onclick="window.location.href='index.html'" style="cursor: pointer;">UFC</div>
+        </div>
+        <div class="nav-links">
+            <!-- Botones ocultos - navegación ahora en menú hamburguesa -->
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="weight-classes-grid">
+            <!-- Primera Fila -->
+            <div class="weight-card" onclick="window.location.href='peso-mosca.html'">
+                <div class="weight-label">
+                    <h3>PESO</h3>
+                    <h3>MOSCA</h3>
+                </div>
+                <div class="fighter-image">
+                    <img src="images/peso-mosca.png" alt="Peso Mosca" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <div class="weight-card" onclick="window.location.href='peso-gallo.html'">
+                <div class="weight-label">
+                    <h3>PESO</h3>
+                    <h3>GALLO</h3>
+                </div>
+                <div class="fighter-image">
+                    <img src="images/peso-gallo.png" alt="Peso Gallo" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <div class="weight-card" onclick="window.location.href='peso-pluma.html'">
+                <div class="weight-label">
+                    <h3>PESO</h3>
+                    <h3>PLUMA</h3>
+                </div>
+                <div class="fighter-image">
+                    <img src="images/peso-pluma.png" alt="Peso Pluma" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <div class="weight-card" onclick="window.location.href='peso-ligero.html'">
+                <div class="weight-label">
+                    <h3>PESO</h3>
+                    <h3>LIGERO</h3>
+                </div>
+                <div class="fighter-image">
+                    <img src="images/peso-ligero.png" alt="Peso Ligero" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <!-- Segunda Fila -->
+            <div class="weight-card" onclick="window.location.href='peso-welter.html'">
+                <div class="weight-label">
+                    <h3>PESO</h3>
+                    <h3>WELTER</h3>
+                </div>
+                <div class="fighter-image">
+                    <img src="images/peso-welter.png" alt="Peso Welter" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <div class="weight-card" onclick="window.location.href='peso-medio.html'">
+                <div class="weight-label">
+                    <h3>PESO</h3>
+                    <h3>MEDIO</h3>
+                </div>
+                <div class="fighter-image">
+                    <img src="images/peso-medio.png" alt="Peso Medio" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <div class="weight-card" onclick="window.location.href='peso-semipesado.html'">
+                <div class="weight-label">
+                    <h3>PESO</h3>
+                    <h3>SEMIPESADO</h3>
+                </div>
+                <div class="fighter-image">
+                    <img src="images/peso-semipesado.png" alt="Peso Semipesado" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <div class="weight-card" onclick="window.location.href='peso-pesado.html'">
+                <div class="weight-label">
+                    <h3>PESO</h3>
+                    <h3>PESADO</h3>
+                </div>
+                <div class="fighter-image">
+                    <img src="images/peso-pesado.png" alt="Peso Pesado" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Overlay de fondo -->
+    <div class="background-overlay"></div>
+    
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

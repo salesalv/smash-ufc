@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC - Rankings</title>
+    <link rel="stylesheet" href="rankings.css">
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="ufc-logo-small" onclick="window.location.href='index.html'" style="cursor: pointer;">UFC</div>
+        </div>
+        <div class="nav-links">
+            <!-- Botones ocultos - navegación ahora en menú hamburguesa -->
+        </div>
+    </nav>
+
+    <!-- Banner Principal -->
+    <div class="main-banner">
+        <h1>RANKINGS OFICIALES UFC</h1>
+        <p>Clasificación actualizada por división</p>
+    </div>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <!-- Selector de Categorías -->
+        <div class="weight-selector">
+            <button class="weight-btn active" onclick="showCategory('mosca')">PESO MOSCA</button>
+            <button class="weight-btn" onclick="showCategory('gallo')">PESO GALLO</button>
+            <button class="weight-btn" onclick="showCategory('pluma')">PESO PLUMA</button>
+            <button class="weight-btn" onclick="showCategory('ligero')">PESO LIGERO</button>
+            <button class="weight-btn" onclick="showCategory('welter')">PESO WELTER</button>
+            <button class="weight-btn" onclick="showCategory('medio')">PESO MEDIO</button>
+            <button class="weight-btn" onclick="showCategory('semipesado')">PESO SEMIPESADO</button>
+            <button class="weight-btn" onclick="showCategory('pesado')">PESO PESADO</button>
+        </div>
+
+        <!-- Rankings por Categoría -->
+        <div class="rankings-container">
+            <!-- Peso Mosca -->
+            <div id="mosca" class="ranking-category active">
+                <div class="champion-card">
+                    <div class="champion-badge">CAMPEÓN</div>
+                    <div class="champion-info">
+                        <h2>Brandon Moreno</h2>
+                        <p class="record">21-7-2</p>
+                    </div>
+                    <div class="belt-icon">🏆</div>
+                </div>
+
+                <div class="contenders-list">
+                    <div class="contender-item">
+                        <span class="rank">#1</span>
+                        <span class="fighter-name">Alexandre Pantoja</span>
+                        <span class="fighter-record">26-5-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#2</span>
+                        <span class="fighter-name">Brandon Royval</span>
+                        <span class="fighter-record">15-7-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#3</span>
+                        <span class="fighter-name">Amir Albazi</span>
+                        <span class="fighter-record">17-1-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#4</span>
+                        <span class="fighter-name">Kai Kara-France</span>
+                        <span class="fighter-record">24-11-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#5</span>
+                        <span class="fighter-name">Alex Perez</span>
+                        <span class="fighter-record">24-8-0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peso Gallo -->
+            <div id="gallo" class="ranking-category">
+                <div class="champion-card">
+                    <div class="champion-badge">CAMPEÓN</div>
+                    <div class="champion-info">
+                        <h2>Sean O'Malley</h2>
+                        <p class="record">18-1-0</p>
+                    </div>
+                    <div class="belt-icon">🏆</div>
+                </div>
+
+                <div class="contenders-list">
+                    <div class="contender-item">
+                        <span class="rank">#1</span>
+                        <span class="fighter-name">Merab Dvalishvili</span>
+                        <span class="fighter-record">17-4-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#2</span>
+                        <span class="fighter-name">Cory Sandhagen</span>
+                        <span class="fighter-record">17-4-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#3</span>
+                        <span class="fighter-name">Marlon Vera</span>
+                        <span class="fighter-record">21-9-1</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#4</span>
+                        <span class="fighter-name">Petr Yan</span>
+                        <span class="fighter-record">17-5-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#5</span>
+                        <span class="fighter-name">Song Yadong</span>
+                        <span class="fighter-record">20-7-1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peso Pluma -->
+            <div id="pluma" class="ranking-category">
+                <div class="champion-card">
+                    <div class="champion-badge">CAMPEÓN</div>
+                    <div class="champion-info">
+                        <h2>Ilia Topuria</h2>
+                        <p class="record">15-0-0</p>
+                    </div>
+                    <div class="belt-icon">🏆</div>
+                </div>
+
+                <div class="contenders-list">
+                    <div class="contender-item">
+                        <span class="rank">#1</span>
+                        <span class="fighter-name">Max Holloway</span>
+                        <span class="fighter-record">25-7-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#2</span>
+                        <span class="fighter-name">Alexander Volkanovski</span>
+                        <span class="fighter-record">26-3-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#3</span>
+                        <span class="fighter-name">Brian Ortega</span>
+                        <span class="fighter-record">16-3-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#4</span>
+                        <span class="fighter-name">Yair Rodríguez</span>
+                        <span class="fighter-record">15-4-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#5</span>
+                        <span class="fighter-name">Arnold Allen</span>
+                        <span class="fighter-record">19-2-0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peso Ligero -->
+            <div id="ligero" class="ranking-category">
+                <div class="champion-card">
+                    <div class="champion-badge">CAMPEÓN</div>
+                    <div class="champion-info">
+                        <h2>Islam Makhachev</h2>
+                        <p class="record">26-1-0</p>
+                    </div>
+                    <div class="belt-icon">🏆</div>
+                </div>
+
+                <div class="contenders-list">
+                    <div class="contender-item">
+                        <span class="rank">#1</span>
+                        <span class="fighter-name">Charles Oliveira</span>
+                        <span class="fighter-record">34-10-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#2</span>
+                        <span class="fighter-name">Justin Gaethje</span>
+                        <span class="fighter-record">25-5-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#3</span>
+                        <span class="fighter-name">Dustin Poirier</span>
+                        <span class="fighter-record">30-9-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#4</span>
+                        <span class="fighter-name">Michael Chandler</span>
+                        <span class="fighter-record">23-8-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#5</span>
+                        <span class="fighter-name">Beneil Dariush</span>
+                        <span class="fighter-record">22-5-1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peso Welter -->
+            <div id="welter" class="ranking-category">
+                <div class="champion-card">
+                    <div class="champion-badge">CAMPEÓN</div>
+                    <div class="champion-info">
+                        <h2>Belal Muhammad</h2>
+                        <p class="record">24-3-1</p>
+                    </div>
+                    <div class="belt-icon">🏆</div>
+                </div>
+
+                <div class="contenders-list">
+                    <div class="contender-item">
+                        <span class="rank">#1</span>
+                        <span class="fighter-name">Leon Edwards</span>
+                        <span class="fighter-record">22-3-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#2</span>
+                        <span class="fighter-name">Kamaru Usman</span>
+                        <span class="fighter-record">20-4-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#3</span>
+                        <span class="fighter-name">Colby Covington</span>
+                        <span class="fighter-record">17-4-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#4</span>
+                        <span class="fighter-name">Shavkat Rakhmonov</span>
+                        <span class="fighter-record">18-0-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#5</span>
+                        <span class="fighter-name">Jack Della Maddalena</span>
+                        <span class="fighter-record">16-2-0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peso Medio -->
+            <div id="medio" class="ranking-category">
+                <div class="champion-card">
+                    <div class="champion-badge">CAMPEÓN</div>
+                    <div class="champion-info">
+                        <h2>Dricus Du Plessis</h2>
+                        <p class="record">22-2-0</p>
+                    </div>
+                    <div class="belt-icon">🏆</div>
+                </div>
+
+                <div class="contenders-list">
+                    <div class="contender-item">
+                        <span class="rank">#1</span>
+                        <span class="fighter-name">Israel Adesanya</span>
+                        <span class="fighter-record">24-3-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#2</span>
+                        <span class="fighter-name">Sean Strickland</span>
+                        <span class="fighter-record">28-6-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#3</span>
+                        <span class="fighter-name">Robert Whittaker</span>
+                        <span class="fighter-record">26-7-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#4</span>
+                        <span class="fighter-name">Jared Cannonier</span>
+                        <span class="fighter-record">17-7-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#5</span>
+                        <span class="fighter-name">Marvin Vettori</span>
+                        <span class="fighter-record">19-7-1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peso Semipesado -->
+            <div id="semipesado" class="ranking-category">
+                <div class="champion-card">
+                    <div class="champion-badge">CAMPEÓN</div>
+                    <div class="champion-info">
+                        <h2>Alex Pereira</h2>
+                        <p class="record">11-2-0</p>
+                    </div>
+                    <div class="belt-icon">🏆</div>
+                </div>
+
+                <div class="contenders-list">
+                    <div class="contender-item">
+                        <span class="rank">#1</span>
+                        <span class="fighter-name">Jamahal Hill</span>
+                        <span class="fighter-record">12-1-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#2</span>
+                        <span class="fighter-name">Jiří Procházka</span>
+                        <span class="fighter-record">30-4-1</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#3</span>
+                        <span class="fighter-name">Magomed Ankalaev</span>
+                        <span class="fighter-record">18-1-1</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#4</span>
+                        <span class="fighter-name">Jan Błachowicz</span>
+                        <span class="fighter-record">29-10-1</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#5</span>
+                        <span class="fighter-name">Aleksandar Rakić</span>
+                        <span class="fighter-record">14-4-0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peso Pesado -->
+            <div id="pesado" class="ranking-category">
+                <div class="champion-card">
+                    <div class="champion-badge">CAMPEÓN</div>
+                    <div class="champion-info">
+                        <h2>Jon Jones</h2>
+                        <p class="record">28-1-0</p>
+                    </div>
+                    <div class="belt-icon">🏆</div>
+                </div>
+
+                <div class="contenders-list">
+                    <div class="contender-item">
+                        <span class="rank">#1</span>
+                        <span class="fighter-name">Tom Aspinall</span>
+                        <span class="fighter-record">14-3-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#2</span>
+                        <span class="fighter-name">Stipe Miocic</span>
+                        <span class="fighter-record">20-4-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#3</span>
+                        <span class="fighter-name">Sergei Pavlovich</span>
+                        <span class="fighter-record">18-2-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#4</span>
+                        <span class="fighter-name">Curtis Blaydes</span>
+                        <span class="fighter-record">18-4-0</span>
+                    </div>
+                    <div class="contender-item">
+                        <span class="rank">#5</span>
+                        <span class="fighter-name">Ciryl Gane</span>
+                        <span class="fighter-record">12-2-0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showCategory(category) {
+            // Ocultar todas las categorías
+            document.querySelectorAll('.ranking-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+            
+            // Desactivar todos los botones
+            document.querySelectorAll('.weight-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar categoría seleccionada
+            document.getElementById(category).classList.add('active');
+            
+            // Activar botón seleccionado
+            event.target.classList.add('active');
+        }
+    </script>
+    
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

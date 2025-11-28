@@ -1,0 +1,424 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Fondo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+    z-index: -1;
+}
+
+/* Navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 100%);
+    position: relative;
+    z-index: 100;
+}
+
+.logo-container {
+    flex: 0 0 auto;
+}
+
+.ufc-logo-small {
+    font-size: 48px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -2px;
+    font-style: italic;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.nav-btn {
+    padding: 12px 24px;
+    background-color: #d4d4d4;
+    color: #000;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+}
+
+.nav-btn:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 212, 212, 0.4);
+}
+
+.nav-btn.active {
+    background-color: #d20a0a;
+    color: #fff;
+}
+
+.nav-btn.active:hover {
+    background-color: #ff0000;
+}
+
+.nav-btn-login {
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+    color: #fff !important;
+    border: 2px solid #d20a0a;
+}
+
+.nav-btn-login:hover {
+    background: linear-gradient(135deg, #ff0000 0%, #b00 100%);
+    border-color: #ff0000;
+}
+
+.nav-btn-register {
+    background: linear-gradient(135deg, #900 0%, #600 100%);
+    color: #fff !important;
+    border: 2px solid #900;
+}
+
+.nav-btn-register:hover {
+    background: linear-gradient(135deg, #b00 0%, #800 100%);
+    border-color: #b00;
+}
+
+/* Contenido Principal */
+.profile-main {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-container {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    border: 2px solid #333;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Header del Perfil */
+.profile-header-section {
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+    padding: 50px 40px;
+    text-align: center;
+}
+
+.profile-avatar-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 900;
+    color: #fff;
+}
+
+.profile-header-section h1 {
+    font-size: 36px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.profile-header-section p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Sección de Formulario */
+.profile-form-section {
+    padding: 40px;
+}
+
+.profile-form-section h2 {
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ddd;
+    letter-spacing: 0.5px;
+}
+
+.form-group input {
+    padding: 15px 18px;
+    background-color: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #d20a0a;
+    background-color: #333;
+    box-shadow: 0 0 0 3px rgba(210, 10, 10, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #666;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-save {
+    flex: 1;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(210, 10, 10, 0.3);
+}
+
+.btn-save:hover {
+    background: linear-gradient(135deg, #ff0000 0%, #b00 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(210, 10, 10, 0.5);
+}
+
+.btn-cancel {
+    flex: 1;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #444 0%, #222 100%);
+    color: #fff;
+    border: 2px solid #666;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-cancel:hover {
+    background: linear-gradient(135deg, #555 0%, #333 100%);
+    border-color: #888;
+    transform: translateY(-2px);
+}
+
+.edit-button-container {
+    margin-top: 20px;
+}
+
+.btn-edit {
+    width: 100%;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(210, 10, 10, 0.3);
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #ff0000 0%, #b00 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(210, 10, 10, 0.5);
+}
+
+.form-group input:disabled {
+    background-color: #1a1a1a;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Información Adicional */
+.profile-info-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 30px 40px;
+    background-color: #0d0d0d;
+    border-top: 2px solid #333;
+}
+
+.info-card {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.info-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #aaa;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-card p {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .nav-links {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-btn {
+        padding: 10px 18px;
+        font-size: 12px;
+    }
+
+    .ufc-logo-small {
+        font-size: 40px;
+    }
+
+    .profile-main {
+        padding: 30px 15px;
+    }
+
+    .profile-header-section {
+        padding: 40px 30px;
+    }
+
+    .profile-avatar-large {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+    }
+
+    .profile-header-section h1 {
+        font-size: 28px;
+    }
+
+    .profile-form-section {
+        padding: 30px 25px;
+    }
+
+    .profile-info-section {
+        grid-template-columns: 1fr;
+        padding: 25px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ufc-logo-small {
+        font-size: 36px;
+    }
+
+    .nav-btn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .profile-header-section {
+        padding: 30px 20px;
+    }
+
+    .profile-avatar-large {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+    }
+
+    .profile-header-section h1 {
+        font-size: 24px;
+    }
+
+    .profile-header-section p {
+        font-size: 16px;
+    }
+
+    .profile-form-section {
+        padding: 25px 20px;
+    }
+
+    .profile-form-section h2 {
+        font-size: 22px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-save,
+    .btn-cancel {
+        width: 100%;
+    }
+}
+

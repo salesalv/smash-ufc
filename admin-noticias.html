@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC - Administrar Noticias</title>
+    <link rel="stylesheet" href="perfil.css">
+    <link rel="stylesheet" href="menu.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .admin-header {
+            background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .admin-header h1 {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .btn-new {
+            background: linear-gradient(135deg, #d20a0a 0%, #900 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .noticias-grid {
+            display: grid;
+            gap: 20px;
+        }
+        .noticia-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .noticia-card h3 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .noticia-card p {
+            color: #aaa;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .noticia-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #888;
+        }
+        .noticia-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-edit, .btn-delete {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .btn-edit {
+            background: #444;
+            color: #fff;
+        }
+        .btn-delete {
+            background: #d20a0a;
+            color: #fff;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .form-group textarea {
+            padding: 15px 18px;
+            background-color: #2a2a2a;
+            border: 2px solid #444;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            min-height: 150px;
+            resize: vertical;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .badge-activa {
+            background: #0a5;
+            color: #fff;
+        }
+        .badge-inactiva {
+            background: #666;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="ufc-logo-small" onclick="window.location.href='index.html'" style="cursor: pointer;">UFC</div>
+        </div>
+        <div class="nav-links"></div>
+    </nav>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>📰 ADMINISTRAR NOTICIAS</h1>
+            <p style="color: rgba(255,255,255,0.9);">Gestiona todas las noticias del blog</p>
+        </div>
+
+        <button class="btn-new" onclick="abrirModalNueva()">➕ NUEVA NOTICIA</button>
+
+        <div id="noticias-container" class="noticias-grid">
+            <!-- Las noticias se cargarán aquí -->
+        </div>
+    </div>
+
+    <!-- Modal para crear/editar noticia -->
+    <div id="modal-noticia" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-titulo" style="color: #fff; margin-bottom: 20px;">NUEVA NOTICIA</h2>
+            <form id="form-noticia" class="profile-form">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" required>
+                </div>
+                <div class="form-group">
+                    <label for="contenido">Contenido</label>
+                    <textarea id="contenido" name="contenido" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="imagen_url">URL de Imagen (opcional)</label>
+                    <input type="url" id="imagen_url" name="imagen_url">
+                </div>
+                <div class="form-group" id="activa-group" style="display: none;">
+                    <label>
+                        <input type="checkbox" id="activa" name="activa" checked>
+                        Noticia Activa
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">💾 GUARDAR</button>
+                    <button type="button" class="btn-cancel" onclick="cerrarModal()">❌ CANCELAR</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="menu.js"></script>
+    <script>
+        let noticiaEditando = null;
+
+        // Verificar que sea admin
+        document.addEventListener('DOMContentLoaded', async function() {
+            const userData = getUserDataFromLocalStorage();
+            if (!userData || userData.rol !== 'admin') {
+                alert('Acceso denegado. Se requieren permisos de administrador.');
+                window.location.href = 'index.html';
+                return;
+            }
+            cargarNoticias();
+        });
+
+        async function cargarNoticias() {
+            try {
+                const result = await getNoticias();
+                if (result.success) {
+                    mostrarNoticias(result.data);
+                }
+            } catch (error) {
+                alert('Error al cargar noticias: ' + error.message);
+            }
+        }
+
+        function mostrarNoticias(noticias) {
+            const container = document.getElementById('noticias-container');
+            if (noticias.length === 0) {
+                container.innerHTML = '<p style="color: #aaa; text-align: center;">No hay noticias aún.</p>';
+                return;
+            }
+
+            container.innerHTML = noticias.map(noticia => `
+                <div class="noticia-card">
+                    <div class="noticia-meta">
+                        <span>Por: ${noticia.autor_nombre || 'Admin'}</span>
+                        <span>${noticia.fecha_creacion_formatted}</span>
+                        <span class="badge ${noticia.activa ? 'badge-activa' : 'badge-inactiva'}">
+                            ${noticia.activa ? 'ACTIVA' : 'INACTIVA'}
+                        </span>
+                    </div>
+                    <h3>${noticia.titulo}</h3>
+                    <p>${noticia.contenido.substring(0, 200)}${noticia.contenido.length > 200 ? '...' : ''}</p>
+                    <div class="noticia-actions">
+                        <button class="btn-edit" onclick="editarNoticia(${noticia.id})">✏️ EDITAR</button>
+                        <button class="btn-delete" onclick="eliminarNoticia(${noticia.id})">🗑️ ELIMINAR</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function abrirModalNueva() {
+            noticiaEditando = null;
+            document.getElementById('modal-titulo').textContent = 'NUEVA NOTICIA';
+            document.getElementById('form-noticia').reset();
+            document.getElementById('activa-group').style.display = 'none';
+            document.getElementById('modal-noticia').classList.add('active');
+        }
+
+        async function editarNoticia(id) {
+            try {
+                const result = await getNoticia(id);
+                if (result.success) {
+                    noticiaEditando = result.data;
+                    document.getElementById('modal-titulo').textContent = 'EDITAR NOTICIA';
+                    document.getElementById('titulo').value = noticiaEditando.titulo;
+                    document.getElementById('contenido').value = noticiaEditando.contenido;
+                    document.getElementById('imagen_url').value = noticiaEditando.imagen_url || '';
+                    document.getElementById('activa').checked = noticiaEditando.activa == 1;
+                    document.getElementById('activa-group').style.display = 'block';
+                    document.getElementById('modal-noticia').classList.add('active');
+                }
+            } catch (error) {
+                alert('Error al cargar noticia: ' + error.message);
+            }
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-noticia').classList.remove('active');
+            noticiaEditando = null;
+        }
+
+        document.getElementById('form-noticia').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const titulo = document.getElementById('titulo').value;
+            const contenido = document.getElementById('contenido').value;
+            const imagenUrl = document.getElementById('imagen_url').value;
+            const activa = document.getElementById('activa').checked;
+
+            try {
+                // Validar campos antes de enviar
+                if (!titulo || titulo.trim().length < 3) {
+                    alert('El título debe tener al menos 3 caracteres');
+                    return;
+                }
+                if (!contenido || contenido.trim().length < 10) {
+                    alert('El contenido debe tener al menos 10 caracteres');
+                    return;
+                }
+                
+                if (noticiaEditando) {
+                    await updateNoticia(noticiaEditando.id, {
+                        titulo: titulo.trim(), 
+                        contenido: contenido.trim(), 
+                        imagen_url: imagenUrl ? imagenUrl.trim() : null, 
+                        activa: activa ? 1 : 0
+                    });
+                    alert('Noticia actualizada exitosamente');
+                } else {
+                    await createNoticia(titulo.trim(), contenido.trim(), imagenUrl ? imagenUrl.trim() : null);
+                    alert('Noticia creada exitosamente');
+                }
+                cerrarModal();
+                cargarNoticias();
+            } catch (error) {
+                console.error('Error completo:', error);
+                alert('Error: ' + (error.message || 'Error desconocido. Revisa la consola para más detalles.'));
+            }
+        });
+
+        async function eliminarNoticia(id) {
+            if (!confirm('¿Estás seguro de que deseas eliminar esta noticia?')) {
+                return;
+            }
+            try {
+                await deleteNoticia(id);
+                alert('Noticia eliminada exitosamente');
+                cargarNoticias();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
+

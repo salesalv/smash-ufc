@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC - Página Principal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="ufc-logo-small" onclick="window.location.href='index.html'" style="cursor: pointer;">UFC</div>
+        </div>
+        <div class="nav-links">
+            <!-- Botones ocultos - navegación ahora en menú hamburguesa -->
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <!-- Logo UFC Principal -->
+        <div class="main-logo">
+            <div class="ufc-logo-main">UFC</div>
+        </div>
+
+        <!-- Tarjeta de Pelea -->
+        <div class="fight-card">
+            <!-- Peleador Izquierdo -->
+            <div class="fighter left-fighter">
+                <h2 class="fighter-name">KHABIB</h2>
+                <p class="fighter-nickname">"THE EAGLE"</p>
+                <p class="fighter-lastname">NURMAGOMEDOV</p>
+            </div>
+
+            <!-- Logo UFC 229 Central -->
+            <div class="event-logo">
+                <div class="ufc-event-logo">
+                    <span class="ufc-text">UFC</span>
+                    <span class="event-number">229</span>
+                </div>
+                <div class="vs-divider">
+                    <span class="vs">VS</span>
+                </div>
+            </div>
+
+            <!-- Peleador Derecho -->
+            <div class="fighter right-fighter">
+                <h2 class="fighter-name">CONNOR</h2>
+                <p class="fighter-nickname">"THE NOTORIOUS"</p>
+                <p class="fighter-lastname">MCGREGOR</p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

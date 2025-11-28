@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC - Peso Medio</title>
+    <link rel="stylesheet" href="perfil-peleador.css">
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="ufc-logo-small" onclick="window.location.href='index.html'" style="cursor: pointer;">UFC</div>
+        </div>
+        <div class="nav-links">
+            <!-- Botones ocultos - navegación ahora en menú hamburguesa -->
+        </div>
+    </nav>
+
+    <!-- Perfil del Peleador -->
+    <main class="fighter-profile">
+        <div class="profile-container">
+            <!-- Imagen del Peleador -->
+            <div class="fighter-photo-section">
+                <div class="fighter-image">
+                    <img src="images/peso-medio.png" alt="Dricus du Plessis" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <!-- Información del Peleador -->
+            <div class="fighter-info-section">
+                <!-- Categoría -->
+                <div class="weight-class-badge">
+                    <span>PESO MEDIO</span>
+                </div>
+
+                <!-- Cinturón -->
+                <div class="championship-belt">
+                    <div class="belt-icon"></div>
+                </div>
+
+                <!-- Nombre del Peleador -->
+                <div class="fighter-name">
+                    <h1>DRICUS</h1>
+                    <h2>DU PLESSIS</h2>
+                </div>
+
+                <!-- Récord -->
+                <div class="fighter-record">
+                    <div class="record-item wins">
+                        <div class="record-number">22</div>
+                        <div class="record-label">V</div>
+                    </div>
+                    <div class="record-item losses">
+                        <div class="record-number">2</div>
+                        <div class="record-label">D</div>
+                    </div>
+                    <div class="record-item draws">
+                        <div class="record-number">0</div>
+                        <div class="record-label">E</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón Volver -->
+        <div class="back-button-container">
+            <button class="back-button" onclick="window.location.href='peleadores.html'">← VOLVER A CATEGORÍAS</button>
+        </div>
+    </main>
+    
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

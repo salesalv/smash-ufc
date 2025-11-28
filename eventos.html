@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC - Blog</title>
+    <link rel="stylesheet" href="eventos.css">
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="ufc-logo-small" onclick="window.location.href='index.html'" style="cursor: pointer;">UFC</div>
+        </div>
+        <div class="nav-links">
+            <!-- Botones ocultos - navegación ahora en menú hamburguesa -->
+        </div>
+    </nav>
+
+    <!-- Banner Principal -->
+    <div class="main-banner">
+        <h1>LA TENDENCIA AHORA</h1>
+    </div>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <!-- Sección de Noticias -->
+        <div id="noticias-section" style="max-width: 1000px; margin: 40px auto 0; padding: 0 20px;">
+            <h2 style="color: #fff; font-size: 32px; margin-bottom: 30px; text-align: center;">📰 ÚLTIMAS NOTICIAS</h2>
+            <div id="noticias-container">
+                <!-- Las noticias se cargarán aquí -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="menu.js"></script>
+    <script>
+        // Cargar noticias activas (público)
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const result = await getNoticiasActivas(); // Solo noticias activas (público)
+                if (result.success && result.data && result.data.length > 0) {
+                    mostrarNoticias(result.data);
+                } else {
+                    // Mostrar mensaje cuando no hay noticias
+                    const container = document.getElementById('noticias-container');
+                    container.innerHTML = '<p style="color: #888; text-align: center; padding: 40px; font-size: 18px;">No hay noticias disponibles en este momento.</p>';
+                }
+            } catch (error) {
+                console.error('Error al cargar noticias:', error);
+                const container = document.getElementById('noticias-container');
+                container.innerHTML = '<p style="color: #d20a0a; text-align: center; padding: 40px; font-size: 18px;">Error al cargar las noticias. Por favor, intenta más tarde.</p>';
+            }
+        });
+
+        async function mostrarNoticias(noticias) {
+            const container = document.getElementById('noticias-container');
+            container.innerHTML = noticias.map(noticia => `
+                <div class="noticia-card" style="background: #1a1a1a; border: 2px solid #333; border-radius: 10px; padding: 25px; margin-bottom: 30px;">
+                    ${noticia.imagen_url ? `<img src="${noticia.imagen_url}" alt="${noticia.titulo}" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">` : ''}
+                    <h3 style="color: #fff; font-size: 24px; margin-bottom: 10px;">${noticia.titulo}</h3>
+                    <div style="color: #888; font-size: 12px; margin-bottom: 15px;">
+                        Por: ${noticia.autor_nombre || 'Admin'} | ${noticia.fecha_creacion_formatted}
+                    </div>
+                    <p style="color: #aaa; line-height: 1.8; margin-bottom: 20px; white-space: pre-wrap;">${noticia.contenido}</p>
+                    <div class="comentarios-section" data-noticia-id="${noticia.id}">
+                        <div style="border-top: 1px solid #333; padding-top: 20px; margin-top: 20px;">
+                            <h4 style="color: #fff; margin-bottom: 15px;">💬 Comentarios</h4>
+                            <div id="comentarios-${noticia.id}" style="margin-bottom: 20px;">
+                                <!-- Los comentarios se cargarán aquí -->
+                            </div>
+                            <div id="form-comentario-${noticia.id}">
+                                <!-- Formulario de comentario se mostrará si el usuario está logueado -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Cargar comentarios y formularios para cada noticia
+            noticias.forEach(noticia => {
+                cargarComentarios(noticia.id);
+                mostrarFormularioComentario(noticia.id);
+            });
+        }
+
+        async function cargarComentarios(noticiaId, forceRefresh = false) {
+            try {
+                // Llamar a getComentarios con forceRefresh para evitar cache
+                const result = await getComentarios(noticiaId, forceRefresh);
+                const container = document.getElementById(`comentarios-${noticiaId}`);
+                
+                if (!container) {
+                    console.error('Contenedor de comentarios no encontrado para noticia:', noticiaId);
+                    return;
+                }
+                
+                // Filtrar comentarios activos en el frontend también (doble verificación)
+                let comentariosActivos = [];
+                if (result.success && result.data) {
+                    comentariosActivos = result.data.filter(comentario => {
+                        const activo = comentario.activo;
+                        return (activo == 1 || activo === '1' || activo === true || activo === 1);
+                    });
+                }
+                
+                if (comentariosActivos.length > 0) {
+                    container.innerHTML = comentariosActivos.map(comentario => `
+                        <div class="comentario-item" style="background: #2a2a2a; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                <div>
+                                    <strong style="color: #fff;">${comentario.usuario_nombre || 'Usuario'}</strong>
+                                    <span style="color: #888; font-size: 12px; margin-left: 10px;">${comentario.fecha_creacion_formatted}</span>
+                                </div>
+                                ${comentario.puede_editar ? `
+                                    <div>
+                                        <button onclick="editarComentario(${comentario.id}, ${noticiaId})" style="background: #444; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; margin-right: 5px;">✏️</button>
+                                        <button onclick="eliminarComentario(${comentario.id}, ${noticiaId})" style="background: #d20a0a; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px;">🗑️</button>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <p style="color: #aaa; line-height: 1.6;" id="comentario-texto-${comentario.id}">${comentario.contenido}</p>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">No hay comentarios aún. ¡Sé el primero en comentar!</p>';
+                }
+            } catch (error) {
+                console.error('Error al cargar comentarios:', error);
+                const container = document.getElementById(`comentarios-${noticiaId}`);
+                if (container) {
+                    container.innerHTML = '<p style="color: #d20a0a; text-align: center; padding: 20px;">Error al cargar comentarios. Por favor, recarga la página.</p>';
+                }
+            }
+        }
+
+        async function mostrarFormularioComentario(noticiaId) {
+            const container = document.getElementById(`form-comentario-${noticiaId}`);
+            
+            // Verificar sesión en el servidor
+            let isLoggedIn = false;
+            try {
+                const sessionCheck = await checkSession();
+                if (sessionCheck.success) {
+                    isLoggedIn = true;
+                    // Actualizar localStorage
+                    if (sessionCheck.data) {
+                        saveUserDataToLocalStorage(sessionCheck.data);
+                    }
+                } else {
+                    // Si no hay sesión en servidor, verificar localStorage
+                    const userData = getUserDataFromLocalStorage();
+                    isLoggedIn = !!userData;
+                    // Si hay datos en localStorage pero no en servidor, limpiar
+                    if (userData) {
+                        removeUserDataFromLocalStorage();
+                    }
+                }
+            } catch (error) {
+                // Si falla, verificar localStorage
+                const userData = getUserDataFromLocalStorage();
+                isLoggedIn = !!userData;
+            }
+            
+            if (isLoggedIn) {
+                container.innerHTML = `
+                    <form onsubmit="event.preventDefault(); agregarComentario(${noticiaId})" style="display: flex; gap: 10px;">
+                        <input type="text" id="comentario-input-${noticiaId}" placeholder="Escribe tu comentario..." required
+                            style="flex: 1; padding: 12px; background: #2a2a2a; border: 2px solid #444; border-radius: 8px; color: #fff; font-size: 14px;">
+                        <button type="submit" style="background: linear-gradient(135deg, #d20a0a 0%, #900 100%); color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; cursor: pointer;">💬 COMENTAR</button>
+                    </form>
+                `;
+            } else {
+                container.innerHTML = '<p style="color: #888; text-align: center; padding: 15px;"><a href="login.html" style="color: #d20a0a;">Inicia sesión</a> para comentar</p>';
+            }
+        }
+
+        async function agregarComentario(noticiaId) {
+            const input = document.getElementById(`comentario-input-${noticiaId}`);
+            const contenido = input.value.trim();
+            
+            if (!contenido) return;
+            
+            // Verificar sesión antes de intentar comentar
+            try {
+                const sessionCheck = await checkSession();
+                if (!sessionCheck.success) {
+                    alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+            } catch (error) {
+                alert('Error al verificar sesión. Por favor, inicia sesión nuevamente.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            try {
+                await createComentario(noticiaId, contenido);
+                input.value = '';
+                cargarComentarios(noticiaId);
+            } catch (error) {
+                if (error.message.includes('No autorizado') || error.message.includes('401')) {
+                    alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+                    window.location.href = 'login.html';
+                } else {
+                    alert('Error al agregar comentario: ' + error.message);
+                }
+            }
+        }
+
+        async function editarComentario(comentarioId, noticiaId) {
+            const nuevoContenido = prompt('Edita tu comentario:', document.getElementById(`comentario-texto-${comentarioId}`).textContent);
+            if (nuevoContenido === null) return;
+            
+            try {
+                await updateComentario(comentarioId, nuevoContenido);
+                cargarComentarios(noticiaId);
+            } catch (error) {
+                alert('Error al editar comentario: ' + error.message);
+            }
+        }
+
+        async function eliminarComentario(comentarioId, noticiaId) {
+            if (!confirm('¿Estás seguro de que deseas eliminar este comentario?')) return;
+            
+            // Verificar sesión antes de eliminar
+            try {
+                const sessionCheck = await checkSession();
+                if (!sessionCheck.success) {
+                    alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+            } catch (error) {
+                alert('Error al verificar sesión. Por favor, inicia sesión nuevamente.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            try {
+                const result = await deleteComentario(comentarioId);
+                if (result.success) {
+                    // Forzar recarga de comentarios sin cache
+                    await cargarComentarios(noticiaId, true);
+                } else {
+                    alert('Error al eliminar comentario: ' + (result.message || 'Error desconocido'));
+                }
+            } catch (error) {
+                console.error('Error completo al eliminar:', error);
+                if (error.message.includes('No autorizado') || error.message.includes('401')) {
+                    alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+                    window.location.href = 'login.html';
+                } else {
+                    alert('Error al eliminar comentario: ' + error.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+

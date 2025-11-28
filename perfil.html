@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC - Mi Perfil</title>
+    <link rel="stylesheet" href="perfil.css">
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="ufc-logo-small" onclick="window.location.href='index.html'" style="cursor: pointer;">UFC</div>
+        </div>
+        <div class="nav-links">
+            <!-- Botones ocultos - navegación ahora en menú hamburguesa -->
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="profile-main">
+        <div class="profile-container">
+            <!-- Header del Perfil -->
+            <div class="profile-header-section">
+                <div class="profile-avatar-large">
+                    <span id="avatar-letter">U</span>
+                </div>
+                <h1 id="profile-name">Usuario</h1>
+                <p id="profile-email">usuario@ejemplo.com</p>
+            </div>
+
+            <!-- Formulario de Edición -->
+            <div class="profile-form-section">
+                <h2>EDITAR PERFIL</h2>
+                
+                <!-- Botón para editar perfil (visible inicialmente) -->
+                <div id="edit-button-container" class="edit-button-container">
+                    <button type="button" id="btn-edit-profile" class="btn-edit">
+                        ✏️ EDITAR PERFIL
+                    </button>
+                </div>
+                
+                <!-- Formulario (oculto inicialmente) -->
+                <form id="profile-form" class="profile-form" style="display: none;">
+                    <!-- Nombre -->
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input 
+                            type="text" 
+                            id="nombre" 
+                            name="nombre" 
+                            placeholder="Tu nombre completo"
+                            required
+                            disabled
+                        >
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="tu@email.com"
+                            required
+                            disabled
+                        >
+                    </div>
+
+                    <!-- Botones de guardar/cancelar -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">
+                            💾 GUARDAR CAMBIOS
+                        </button>
+                        <button type="button" class="btn-cancel" id="btn-cancel-edit">
+                            ❌ CANCELAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Información Adicional -->
+            <div class="profile-info-section">
+                <div class="info-card">
+                    <h3>📅 Fecha de Registro</h3>
+                    <p id="fecha-registro">01/01/2025</p>
+                </div>
+                <div class="info-card">
+                    <h3>🆔 ID de Usuario</h3>
+                    <p id="user-id">UFC-001</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="menu.js"></script>
+    <script src="perfil.js"></script>
+</body>
+</html>
+
